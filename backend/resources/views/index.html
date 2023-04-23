@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="formulario"></div>
+    <img src="" alt="">
+ <script>
+  fetch('http://localhost:8000/api/formulario')
+  .then(response => response.json())
+  .then(data => {
+    const formularioDiv = document.getElementById('formulario');
+
+    // Cria uma tabela HTML para exibir os dados
+    const table = document.createElement('table');
+    formularioDiv.appendChild(table);
+
+    // Itera sobre as chaves do objeto e adiciona uma linha para cada chave-valor na tabela
+    for (const key in data) {
+      const tr = document.createElement('tr');
+      table.appendChild(tr);
+
+      // Cria uma célula para o nome do parâmetro
+      const tdKey = document.createElement('td');
+      tdKey.innerText = key;
+      tr.appendChild(tdKey);
+
+      // Cria uma célula para o valor do parâmetro
+      const tdValue = document.createElement('td');
+      if (key === 'curriculum') {
+        // Se o parâmetro for 'curriculum', cria um link para o arquivo PDF
+        const link = document.createElement('a');
+        link.href = data[key];
+        link.innerText = 'Ver currículo';
+        tdValue.appendChild(link);
+      } else {
+        // Caso contrário, exibe o valor diretamente na célula
+        tdValue.innerText = data[key];
+      }
+      tr.appendChild(tdValue);
+    }
+  })
+  .catch(error => console.error(error));
+
+ </script>
+</body>
+</html>

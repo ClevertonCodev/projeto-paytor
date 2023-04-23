@@ -1,0 +1,96 @@
+.limiter-form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#form-pg{
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  flex-wrap: wrap;
+  align-content: space-between;
+  margin: auto;
+}
+
+.form-input {
+  flex-basis: calc(50% - 20px);
+  margin-right: 20px;
+  margin-top: 2rem;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .form-input {
+    flex-basis: 100%;
+    margin-right: 0;
+    margin-top: 2rem;
+  }
+}
+
+
+.form-input input, textarea, select {
+  width: 100%;
+  padding: 15px;
+  padding-left: 0;
+  border: none;
+  border-radius: .25rem;
+  border-bottom: 5px solid #a37fdf;
+  outline: none;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+} 
+
+.form-input input:focus {
+  border-color: #5112c4;
+  outline: 0;
+}
+
+.form-input textarea:focus {
+  border-color: #5112c4;
+  outline: 0;
+}
+.title{
+  margin: auto;
+  margin-top: 2rem;
+}
+
+#name, #phone, #email, #intended_position, #schooling, #comments{
+  position: absolute;
+}
+.label-volume{
+  top: 1rem;
+  left: 0;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+  opacity: 0.8;
+  font-size: 20px;;
+  
+}
+
+.label-volume:focus-within {
+  opacity: 3;
+  color:#5112c4;
+  top: -0.5rem;
+  font-size: 16px;
+  font-weight: bold;
+}
+#curriculum, #datetime-local {
+  top: -0.8rem;
+}
+
+
+.volume {
+  opacity: 3;
+  color:#5112c4;
+  top: -0.5rem;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#position {
+  padding: 1px;
+}
+
+#date{
+  margin-top: 2.2rem;
+  padding: 2px;
+}
