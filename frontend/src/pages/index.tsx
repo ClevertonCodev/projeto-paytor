@@ -11,6 +11,7 @@ import Ischooling from "@/types/interfaceshcooling";
 import CustomModal from "@/components/modal";
 import { useRouter } from "next/router";
 import { navigateToEscolaridade } from "@/services/link";
+import { getEscolaridade } from "@/services/getEscolaridade";
 
 
 export default function FormPages() {
@@ -81,22 +82,22 @@ export default function FormPages() {
     }
     setCurriculum(file);
   };
-
+  
   useEffect(() => {
-    api.get("/escolaridade").then((response: { data: Ischooling[] }) => {
-      setScholinget(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-      if(scholinget.length === 0){
-       alert('Por favor, cadastre alguma escolaridade antes de continuar.');
+      apiScho()
+    async function apiScho() {
+      const getScho = await getEscolaridade();
+      if(getScho?.length === 0){
+        alert('erro, voce precisa cadastrar niveis de escolaridade para continuar')
         navigateToEscolaridade(router);
       }else{
-        return alert('erro inesperado!');
+        console.log(getScho);
+        setScholinget(getScho);
       }
-    });
+    }
   }, []);
 
+console.log(scholinget)
   const Form = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);

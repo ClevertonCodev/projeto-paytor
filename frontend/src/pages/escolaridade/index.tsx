@@ -16,7 +16,7 @@ export default function Escolaridade() {
   const data = {
     schooling: schooling
   }
-  console.log(schooling, data)
+  
   const FormScho = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
