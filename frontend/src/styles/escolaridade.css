@@ -1,0 +1,26 @@
+.form-scho{
+    width: 15rem;
+    margin: auto;
+    margin-top: 2rem;
+    
+}
+
+.butt{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+#schoo{
+   padding: 10px 20px;  
+   border:  solid 5px #a37fdf;  
+}
+
+#schoo:focus{
+ border-color:  #5112c4;
+}
+
+#schoo:hover{ 
+ border-color:  #5112c4;
+}

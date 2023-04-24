@@ -9,6 +9,9 @@ import IFormulario from "../types/interfaceformulario";
 import Loader from "@/components/loader";
 import Ischooling from "@/types/interfaceshcooling";
 import CustomModal from "@/components/modal";
+import { useRouter } from "next/router";
+import { navigateToEscolaridade } from "@/services/link";
+
 
 export default function FormPages() {
   const [name, setName] = useState<string>("");
@@ -22,6 +25,8 @@ export default function FormPages() {
   const [date_time, setDate] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  
+  const router = useRouter();
   const data = {
     name: name,
     email: email,
@@ -32,7 +37,7 @@ export default function FormPages() {
     curriculum: curriculum,
     date_time: date_time,
   };
-
+  
   const handleName = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleClickStyle(event);
     setName(event.target.value);
@@ -80,10 +85,18 @@ export default function FormPages() {
   useEffect(() => {
     api.get("/escolaridade").then((response: { data: Ischooling[] }) => {
       setScholinget(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+      if(scholinget.length === 0){
+       alert('Por favor, cadastre alguma escolaridade antes de continuar.');
+        navigateToEscolaridade(router);
+      }else{
+        return alert('erro inesperado!');
+      }
     });
   }, []);
 
-  console.log(scholinget);
   const Form = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
@@ -109,17 +122,19 @@ export default function FormPages() {
         if (error.response && error.response.data.errors) {
           const errors = error.response.data.errors;
           const errorMessages = Object.values(errors).flat();
-          alert(errorMessages.join('\n'));
+         return alert(errorMessages.join('\n'));
         } else {
           console.log(error);
-          alert("Erro inesperado");
+          
           setName("");
           setEmail("");
           setPhone("");
           setIntended("");
           setSchooling("");
           setComments("");
-          setDate("");
+          setDate(""); 
+          alert('erro inesperado!');
+          
         }
       });
   };
@@ -251,7 +266,7 @@ export default function FormPages() {
               <ButtonMY className="submit" type="submit">
                 Enviar
               </ButtonMY>
-              <ButtonMY className="reset" type="reset">
+              <ButtonMY className="reset" type="reset" >
                 Resetar
               </ButtonMY>
             </div>
